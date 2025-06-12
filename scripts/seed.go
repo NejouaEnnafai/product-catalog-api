@@ -1,4 +1,4 @@
-package main
+package seed
 
 import (
 	"log"
@@ -87,7 +87,8 @@ var users = []struct {
 	},
 }
 
-func main() {
+// SeedDatabase initializes and seeds the database with sample data
+func SeedDatabase() {
 	// Initialize the database
 	dbPath := filepath.Join(".", "product_catalog.db")
 	err := db.Initialize(dbPath)

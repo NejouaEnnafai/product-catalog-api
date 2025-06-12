@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"testing"
 )
 
 // executeRequest creates a new ResponseRecorder, executes the request against the handler,

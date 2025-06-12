@@ -92,20 +92,20 @@ func TestProductsHandler(t *testing.T) {
 			}
 			
 			// Check the response body
-			var response models.PaginatedResponse
+			var response struct {
+				Total   int             `json:"total"`
+				Page    int             `json:"page"`
+				Limit   int             `json:"limit"`
+				Results []models.Product `json:"results"`
+			}
 			err = json.Unmarshal(rr.Body.Bytes(), &response)
 			if err != nil {
 				t.Fatalf("Error unmarshaling response: %v", err)
 			}
 			
 			// Check the number of products
-			products, ok := response.Results.([]models.Product)
-			if !ok {
-				t.Fatalf("Expected results to be []models.Product")
-			}
-			
-			if len(products) != tc.expectedCount {
-				t.Errorf("Expected %d products, got %d", tc.expectedCount, len(products))
+			if len(response.Results) != tc.expectedCount {
+				t.Errorf("Expected %d products, got %d", tc.expectedCount, len(response.Results))
 			}
 		})
 	}
